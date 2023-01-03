@@ -1,0 +1,48 @@
+services:
+  api:
+    build:
+      context: ./api
+      target: development
+    command: ["npm", "run", "dev"]
+    container_name: api
+    ports:
+      - '3000:3000'
+    env_file: .env-dev
+    volumes:
+      - './api/plugins:/usr/src/api/plugins'
+      - './api/routes:/usr/src/api/routes'
+      - './api/app.js:/usr/src/api/app.js'
+    depends_on: 
+      - postgres
+
+  postgres:
+    build:
+      target: development
+    container_name: postgres-ultri-api
+    hostname: postgres
+    image: 'postgres:14'
+    ports:
+      - '5432:5432'
+    restart: always
+    env_file: .env-dev
+    volumes:
+      - data_volume:/var/lib/postgres/data
+
+  webapp:
+    build:
+      context: ./webapp
+      target: development
+    command: ["quasar", "dev"]
+    container_name: izzup-webapp
+    ports:
+      - '9000:9000'
+    env_file: .env-dev
+    volumes:
+      - './webapp/src:/usr/src/webapp/src'
+      - './webapp/public:/usr/src/webapp/public'
+    depends_on: 
+      - api
+
+volumes:
+  data_volume: {}
+
