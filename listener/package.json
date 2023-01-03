@@ -1,0 +1,14 @@
+{
+  "name": "ultri-listener",
+  "version": "1.0.0",
+  "description": "Ultri-Izzup Event Listener for Postgres",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Brian Winkers",
+  "license": "ISC",
+  "dependencies": {
+    "pg-listen": "^1.7.0"
+  }
+}
