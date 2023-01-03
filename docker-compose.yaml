@@ -18,7 +18,7 @@ services:
   postgres:
     build:
       target: development
-    container_name: postgres-ultri-api
+    container_name: postgres-ultri-izzup
     hostname: postgres
     image: 'postgres:14'
     ports:
@@ -42,6 +42,14 @@ services:
       - './webapp/public:/usr/src/webapp/public'
     depends_on: 
       - api
+    
+  ssl-proxy:
+    image: openresty/openresty:1.21.4.1-0-jammy
+    container_name: ultri-ssl-proxy
+    restart: on-failure
+    ports:
+    - "80:80"
+    - "443:443"
 
 volumes:
   data_volume: {}
