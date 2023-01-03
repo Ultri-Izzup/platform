@@ -1,0 +1,1 @@
+# Postman tests for DevMailer (SMTP4Dev)
